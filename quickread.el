@@ -21,6 +21,30 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;; Commentary:
+;; This package provides `quickread-mode', a speed-reading mode for Emacs.
+;; It displays one word at a time in the center of the buffer, highlighting
+;; a specific letter within the word to help maintain focus.
+;;
+;; To use:
+;; 1. Call `M-x quickread-mode` to toggle the mode.
+;; 2. Once enabled, `quickread-mode` will automatically advance through
+;;    words in the current buffer.
+;;
+;; Keybindings in `quickread-mode`:
+;; - `q`: `quickread-quit` - Exits quickread-mode.
+;; - `s`: `quickread-start-org-stop` - Toggles pausing/unpausing the reading.
+;; - `h` or `<left>`: `quickread-backward-word` - Moves to the previous word.
+;; - `l` or `<right>`: `quickread-forward-word` - Moves to the next word.
+;; - `u`: `quickread-faster` - Increases the reading speed (WPM).
+;; - `d`: `quickread-slower` - Decreases the reading speed (WPM).
+;; - `t`: `quickread-time` - Displays reading progress and estimated time remaining.
+;;
+;; The reading speed can be configured using the variable `quickread-wpm`.
+;; `quickread-mode` integrates with `centered-cursor-mode` to keep the
+;; highlighted word centered on the screen.
+
+;;; Code:
 
 (require 'centered-cursor-mode)
 
@@ -31,7 +55,7 @@
 (defvar quickread-mode-map
   (let ((map (make-keymap)))
     (define-key map (kbd "q") 'quickread-quit)
-    (define-key map (kbd "s") 'quickread-start/stop)
+    (define-key map (kbd "s") 'quickread-start-org-stop)
     (define-key map (kbd "h") 'quickread-backward-word)
     (define-key map (kbd "l") 'quickread-forward-word)
     (define-key map (kbd "<left>") 'quickread-backward-word)
@@ -56,6 +80,7 @@
   "Face for accent character."
   :group 'quickread)
 
+;;;###autoload
 (define-minor-mode quickread-mode
   "quickread mode"
   :lighter " Quickread"
@@ -124,7 +149,7 @@
     (move-overlay quickread--accent-overlay (1- accent) accent)
     (ccm-position-cursor)))
 
-(defun quickread-start/stop ()
+(defun quickread-start-org-stop ()
   "Toggle pause/unpause quickread."
   (interactive)
   (if quickread--running
@@ -182,3 +207,4 @@ Decreases the wpm (words per minute) parameter. See the variable
 
 (provide 'quickread)
 
+;;; quickread.el ends here
