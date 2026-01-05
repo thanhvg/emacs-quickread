@@ -1,30 +1,35 @@
 #+TITLE: quickread.el - Speed Reading Mode for Emacs
 
 * Introduction
-This package provides `quickread-mode`, a speed-reading mode for Emacs.
+This package provides =quickread-mode=, a speed-reading mode for Emacs.
 It displays one word at a time in the center of the buffer, highlighting
 a specific letter within the word to help maintain focus.
 
 This is a blantant copy of https://git.sr.ht/~iank/spray with a few changes.
 
+Once enabled it will hide the cursor and place a highlight on a certain
+character of the current word and then move to the next word in a controllable
+speed, it will continue until the end of buffer unless interrupted by start stop
+or quit commands. This is expected to guide the reading process.
+
 * Usage
 To use:
-1. Call `M-x quickread-mode` to toggle the mode.
-2. Once enabled, `quickread-mode` will automatically advance through
+1. Call =M-x quickread-mode= to toggle the mode.
+2. Once enabled, =quickread-mode= will automatically advance through
    words in the current buffer.
 
-* Keybindings in `quickread-mode`
-- `q`: `quickread-quit` - Exits quickread-mode.
-- `s`: `quickread-start-org-stop` - Toggles pausing/unpausing the reading.
-- `h` or `<left>`: `quickread-backward-word` - Moves to the previous word.
-- `l` or `<right>`: `quickread-forward-word` - Moves to the next word.
-- `u`: `quickread-faster` - Increases the reading speed (WPM).
-- `d`: `quickread-slower` - Decreases the reading speed (WPM).
-- `t`: `quickread-time` - Displays reading progress and estimated time remaining.
+* Keybindings in =quickread-mode=
+- =q=: =quickread-quit= - Exits quickread-mode.
+- =s=: =quickread-start-org-stop= - Toggles pausing/unpausing the reading.
+- =h= or =<left>=: =quickread-backward-word= - Moves to the previous word.
+- =l= or =<right>=: =quickread-forward-word= - Moves to the next word.
+- =u=: =quickread-faster= - Increases the reading speed (WPM).
+- =d=: =quickread-slower= - Decreases the reading speed (WPM).
+- =t=: =quickread-time= - Displays reading progress and estimated time remaining.
 
 * Configuration
-The reading speed can be configured using the variable `quickread-wpm`.
-`quickread-mode` integrates with `centered-cursor-mode` to keep the
+The reading speed can be configured using the variable =quickread-wpm=.
+=quickread-mode= integrates with =centered-cursor-mode= to keep the
 highlighted word centered on the screen.
 * Refs
 https://git.sr.ht/~iank/spray
